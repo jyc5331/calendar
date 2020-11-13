@@ -47,10 +47,10 @@
         </tbody>
       </table>
     </div>
-    <!--js for date display in jumbotron-->
+    <!--js-->
     <script>
       document.getElementById("currentDay").innerHTML = formatAMPM();
-
+      // function for displaying Date at top of calendar
       function formatAMPM() {
         var d = new Date(),
           minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
@@ -60,6 +60,10 @@
           days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
         return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate();
       }
+      // function for changing color in rows based on time, time works!
+      var today = new Date();
+      var time = today.getHours()
+      console.log(time);
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
