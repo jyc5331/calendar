@@ -17,9 +17,7 @@ document.getElementById("currentDay").innerHTML = formatAMPM();
       console.log(row);
 
       //local storage code
-      $('.saveBtn').on('click', function(event){
     
-      });
 
      // moment().hour(Number); was suggested by Chris to get time background shift up and running 
 
