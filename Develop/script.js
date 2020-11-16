@@ -16,7 +16,15 @@ document.getElementById("currentDay").innerHTML = formatAMPM();
       console.log(time);
       console.log(row);
 
+//button adjustments 
+document.querySelector(".saveBtn");
+buttonEl.addEventListener("click", function() {
+    alert("button clicked");
+  });
+      
       //local storage code
+
+      //  when the user clicks the save icon tasks are saved to local storage  
     
 
      // moment().hour(Number); was suggested by Chris to get time background shift up and running 
