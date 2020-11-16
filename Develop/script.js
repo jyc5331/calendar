@@ -1,36 +1,62 @@
-      // function for displaying Date at top of calendar
+// function for displaying Date at top of calendar
 
 document.getElementById("currentDay").innerHTML = formatAMPM();
 
-      function formatAMPM() {
-        var d = new Date(),
-          months = ['January','February','March','April','May','June','July','August','September','October','November','December'],
-          days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-        return days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate();
-      }
+function formatAMPM() {
+  var d = new Date(),
+    months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+  return days[d.getDay()] + " " + months[d.getMonth()] + " " + d.getDate();
+}
 
-      // variables for changing color in rows based on time
-      var row = Array.from(document.querySelectorAll(".row"))
-      var today = new Date();
-      var time = today.getHours()
-      console.log(time);
-      console.log(row);
+//changing background color based on time using parseInt and moment
+//browser registers moment as undefined so function will not run
+var currentHour = moment().hour();
+$(".hour").each(function () {
+  var inputTime = parseInt($(this).data("time"));
 
-//button adjustments 
+  if (currentHour === inputTime) {
+    $(this).addClass("present");
+  } else if (currentHour > inputTime) {
+    $(this).addClass("past");
+  } else if (currentHour < inputTime) {
+    $(this).addClass("future");
+  }
+});
+
+//button adjustments
 document.querySelector(".saveBtn");
-buttonEl.addEventListener("click", function() {
-    alert("button clicked");
-  });
-      
-      //local storage code
+buttonEl.addEventListener("click", function () {
+  alert("button clicked");
+});
 
-      //  when the user clicks the save icon tasks are saved to local storage  
-    
+//local storage code
 
-     // moment().hour(Number); was suggested by Chris to get time background shift up and running 
+//  when the user clicks the save icon tasks are saved to local storage
 
-          /* HELP localstorage, make it so that when the save icon is clicked, contents of userInput are stored to local server
+/*  localstorage, make it so that when the save icon is clicked, contents of userInput are stored to local server. should involve set and get 
       window.onbeforeunload = function() {
     localStorage.setItem("", $('#userInput').val());
-      }
+      
       */
