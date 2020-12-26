@@ -32,7 +32,11 @@ function formatAMPM() {
 
 //changing background color based on time using parseInt and moment
 //browser registers moment as undefined so function will not run
-var currentHour = moment().hour();
+
+var currentDate = new Date();
+var currentHour = currentDate.getHours();
+console.log(currentHour);
+
 $(".hour").each(function () {
   var inputTime = parseInt($(this).data("time"));
 
