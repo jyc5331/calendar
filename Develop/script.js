@@ -1,7 +1,9 @@
 //global variables and document elements
-document.getElementById("currentDay").innerHTML = formatAMPM();
+document.querySelector("#currentDay").innerHTML = formatAMPM();
+var timeBlocks = document.querySelectorAll(".timeblock");
+var saveBtn = document.querySelector(".saveBtnImg");
 
-//date function 
+//date function
 function formatAMPM() {
   var d = new Date(),
     months = [
@@ -32,17 +34,32 @@ function formatAMPM() {
 
 //changing background color based on time using Date and getHours
 
-function changeBackgroundColor (){
+function changeBackgroundColor() {
   var currentDate = new Date();
   var currentHour = currentDate.getHours();
-  var timeBlocks = document.querySelector("#time-blocks")
+  console.log(timeBlocks);
   console.log(currentHour);
-};
+  timeBlocks.forEach(function (timeBlock, i) {
+    console.log(timeBlock.id);
+    var documentHour = parseInt(timeBlock.id.match(/[0-9]/g).join(""));
+    // or try this parseInt(timeBlock.id.slice(5));
+    console.log(documentHour);
+    if (currentHour > documentHour) {
+      timeBlock.classList.add("past");
+    }
+  });
+}
 
+function saveTasks() {
+  //event.preventDefault();
+  console.log("saveTasks function is running");
+  var unsavedContent = timeBlocks.textContent;
+  console.log(unsavedContent);
+  localStorage.setItem("content", unsavedContent);
+}
 
 //local storage code
 
-//  when the user clicks the save icon tasks are saved to local storage
-
-//event handlers and function calls 
+//event handlers and function calls
 changeBackgroundColor();
+saveTasks();
