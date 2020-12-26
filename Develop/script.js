@@ -1,7 +1,7 @@
-// function for displaying Date at top of calendar
-
+//global variables and document elements
 document.getElementById("currentDay").innerHTML = formatAMPM();
 
+//date function 
 function formatAMPM() {
   var d = new Date(),
     months = [
@@ -30,37 +30,19 @@ function formatAMPM() {
   return days[d.getDay()] + " " + months[d.getMonth()] + " " + d.getDate();
 }
 
-//changing background color based on time using parseInt and moment
-//browser registers moment as undefined so function will not run
+//changing background color based on time using Date and getHours
 
-var currentDate = new Date();
-var currentHour = currentDate.getHours();
-console.log(currentHour);
+function changeBackgroundColor (){
+  var currentDate = new Date();
+  var currentHour = currentDate.getHours();
+  var timeBlocks = document.querySelector("#time-blocks")
+  console.log(currentHour);
+};
 
-$(".hour").each(function () {
-  var inputTime = parseInt($(this).data("time"));
-
-  if (currentHour === inputTime) {
-    $(this).addClass("present");
-  } else if (currentHour > inputTime) {
-    $(this).addClass("past");
-  } else if (currentHour < inputTime) {
-    $(this).addClass("future");
-  }
-});
-
-//button adjustments
-document.querySelector(".saveBtn");
-buttonEl.addEventListener("click", function () {
-  alert("button clicked");
-});
 
 //local storage code
 
 //  when the user clicks the save icon tasks are saved to local storage
 
-/*  localstorage, make it so that when the save icon is clicked, contents of userInput are stored to local server. should involve set and get 
-      window.onbeforeunload = function() {
-    localStorage.setItem("", $('#userInput').val());
-      
-      */
+//event handlers and function calls 
+changeBackgroundColor();
