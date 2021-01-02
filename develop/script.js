@@ -1,7 +1,7 @@
 //global variables and document elements
 document.querySelector("#currentDay").innerHTML = formatAMPM();
 var timeBlocks = document.querySelectorAll(".timeblock");
-var saveBtn = document.querySelector(".saveBtnImg");
+var saveBtns = document.querySelectorAll(".saveBtnImg");
 
 //date function
 function formatAMPM() {
@@ -42,10 +42,13 @@ function changeBackgroundColor() {
   timeBlocks.forEach(function (timeBlock, i) {
     console.log(timeBlock.id);
     var documentHour = parseInt(timeBlock.id.match(/[0-9]/g).join(""));
-    // or try this parseInt(timeBlock.id.slice(5));
     console.log(documentHour);
     if (currentHour > documentHour) {
       timeBlock.classList.add("past");
+    } else if (currentHour < documentHour) {
+      timeBlock.classList.add("future");
+    } else {
+      timeBlock.classList.add("present");
     }
   });
 }
@@ -54,12 +57,18 @@ function saveTasks() {
   //event.preventDefault();
   console.log("saveTasks function is running");
   var unsavedContent = timeBlocks.textContent;
+  //button.dataset.time
+  var timeBlockButton = this.dataset.time;
+  console.log(timeBlockButton);
   console.log(unsavedContent);
+  document.querySelector("#hour-" + timeBlockButton);
   localStorage.setItem("content", unsavedContent);
+  //console log all values typed into corresponding inputs
 }
-
-//local storage code
 
 //event handlers and function calls
 changeBackgroundColor();
-saveTasks();
+
+saveBtns.forEach(function (saveBtn) {
+  saveBtn.addEventListener("click", saveTasks);
+});
