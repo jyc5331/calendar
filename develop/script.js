@@ -2,6 +2,17 @@
 document.querySelector("#currentDay").innerHTML = formatAMPM();
 var timeBlocks = document.querySelectorAll(".timeblock");
 var saveBtns = document.querySelectorAll(".saveBtnImg");
+var timeBlockData = {
+  9: "",
+  10: "",
+  11: "",
+  12: "",
+  13: "",
+  14: "",
+  15: "",
+  16: "",
+  17: "",
+};
 
 //date function
 function formatAMPM() {
@@ -62,28 +73,27 @@ function saveTasks() {
   timeBlockObject[clickedTimeBlock] = inputText;
   localStorage.setItem("timeBlockStorage", JSON.stringify(timeBlockObject));
 }
+//without this if check, it would set localstorage value to empty string on every refresh
+if (localStorage.getItem("timeBlockStorage") === null) {
+  localStorage.setItem("timeBlockStorage", JSON.stringify(timeBlockData));
+}
+//populate the page with data from local storage timeBlocks.foreach use value =
+function populatePage() {
+  if (localStorage.getItem("timeBlockStorage") !== null)
+    console.log("There is info in local storage");
+}
 
 //event handlers and function calls
 changeBackgroundColor();
 
 saveBtns.forEach(function (saveBtn) {
   saveBtn.addEventListener("click", saveTasks);
+  saveBtn.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.querySelectorAll(".saveBtnImg").click(saveTasks);
+    }
+  });
 });
 
-var timeBlockData = {
-  9: "",
-  10: "",
-  11: "",
-  12: "",
-  13: "",
-  14: "",
-  15: "",
-  16: "",
-  17: "",
-};
-//without this if check, it would set localstorage value to empty string on every refresh
-if (localStorage.getItem("timeBlockStorage") === null) {
-  localStorage.setItem("timeBlockStorage", JSON.stringify(timeBlockData));
-}
-timeBlockData["10"];
-//populate the page with data from local storage timeBlocks.foreach use value =
+populatePage();
