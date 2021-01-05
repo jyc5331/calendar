@@ -55,15 +55,12 @@ function changeBackgroundColor() {
 
 function saveTasks() {
   //event.preventDefault();
-  console.log("saveTasks function is running");
-  var unsavedContent = timeBlocks.textContent;
-  //button.dataset.time
-  var timeBlockButton = this.dataset.time;
-  console.log(timeBlockButton);
-  console.log(unsavedContent);
-  document.querySelector("#hour-" + timeBlockButton);
-  localStorage.setItem("content", unsavedContent);
-  //console log all values typed into corresponding inputs
+  var clickedTimeBlock = this.dataset.time;
+  var inputText = document.querySelector("#hour-" + clickedTimeBlock).value;
+  console.log(inputText);
+  var timeBlockObject = JSON.parse(localStorage.getItem("timeBlockStorage"));
+  timeBlockObject[clickedTimeBlock] = inputText;
+  localStorage.setItem("timeBlockStorage", JSON.stringify(timeBlockObject));
 }
 
 //event handlers and function calls
@@ -72,3 +69,21 @@ changeBackgroundColor();
 saveBtns.forEach(function (saveBtn) {
   saveBtn.addEventListener("click", saveTasks);
 });
+
+var timeBlockData = {
+  9: "",
+  10: "",
+  11: "",
+  12: "",
+  13: "",
+  14: "",
+  15: "",
+  16: "",
+  17: "",
+};
+//without this if check, it would set localstorage value to empty string on every refresh
+if (localStorage.getItem("timeBlockStorage") === null) {
+  localStorage.setItem("timeBlockStorage", JSON.stringify(timeBlockData));
+}
+timeBlockData["10"];
+//populate the page with data from local storage timeBlocks.foreach use value =
