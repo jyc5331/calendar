@@ -88,12 +88,13 @@ changeBackgroundColor();
 
 saveBtns.forEach(function (saveBtn) {
   saveBtn.addEventListener("click", saveTasks);
+});
+saveBtns.forEach(function (saveBtn) {
   saveBtn.addEventListener("keyup", function (event) {
+    event.preventDefault();
     if (event.keyCode === 13) {
-      event.preventDefault();
-      document.querySelectorAll(".saveBtnImg").click(saveTasks);
+      saveBtn.addEventListener("click", saveTasks);
     }
   });
 });
-
 populatePage();
