@@ -64,9 +64,9 @@ function changeBackgroundColor() {
   });
 }
 
-function saveTasks() {
+function saveTasks(saveBtn) {
   //event.preventDefault();
-  var clickedTimeBlock = this.dataset.time;
+  var clickedTimeBlock = saveBtn.dataset.time;
   var inputText = document.querySelector("#hour-" + clickedTimeBlock).value;
   console.log(inputText);
   var timeBlockObject = JSON.parse(localStorage.getItem("timeBlockStorage"));
@@ -81,20 +81,34 @@ if (localStorage.getItem("timeBlockStorage") === null) {
 function populatePage() {
   if (localStorage.getItem("timeBlockStorage") !== null)
     console.log("There is info in local storage");
+  //access timeBlockStorage and parse
+  //JSON.parse(localStorage.getItem("timeBlockStorage"));
+  //fill timeBlocks with the parsed data...
+  //timeBlocks.forEach.value = timeBlockData;
 }
 
 //event handlers and function calls
 changeBackgroundColor();
 
 saveBtns.forEach(function (saveBtn) {
-  saveBtn.addEventListener("click", saveTasks);
+  saveBtn.addEventListener("click", saveTasks(saveBtn));
 });
 saveBtns.forEach(function (saveBtn) {
   saveBtn.addEventListener("keyup", function (event) {
     event.preventDefault();
     if (event.keyCode === 13) {
-      saveBtn.addEventListener("click", saveTasks);
+      saveTasks(saveBtn);
+      console.log("still working");
     }
   });
 });
+timeBlocks.forEach(function (timeBlock) {
+  timeBlock.addEventListener("keyup", function (event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+      saveTasks(timeBlock);
+    }
+  });
+});
+
 populatePage();
