@@ -76,22 +76,29 @@ function saveTasks(saveBtn) {
 //without this if check, it would set localstorage value to empty string on every refresh
 if (localStorage.getItem("timeBlockStorage") === null) {
   localStorage.setItem("timeBlockStorage", JSON.stringify(timeBlockData));
+  console.log("is this thing even working?");
 }
 //populate the page with data from local storage timeBlocks.foreach use value =
 function populatePage() {
-  if (localStorage.getItem("timeBlockStorage") !== null)
-    console.log("There is info in local storage");
+  if (localStorage.getItem("timeBlockStorage") !== null) {
+    var storedData = JSON.parse(localStorage.getItem("timeBlockStorage"));
+    timeBlocks = storedData;
+    for (const time in timeBlocks) {
+      console.log(`${time}: ${timeBlocks[time]}`);
+      document.querySelector("#hour-" + time).value = timeBlocks[time];
+    }
+  }
   //access timeBlockStorage and parse
-  //JSON.parse(localStorage.getItem("timeBlockStorage"));
   //fill timeBlocks with the parsed data...
-  //timeBlocks.forEach.value = timeBlockData;
 }
 
 //event handlers and function calls
 changeBackgroundColor();
 
 saveBtns.forEach(function (saveBtn) {
-  saveBtn.addEventListener("click", saveTasks(saveBtn));
+  saveBtn.addEventListener("click", function (event) {
+    saveTasks(saveBtn);
+  });
 });
 saveBtns.forEach(function (saveBtn) {
   saveBtn.addEventListener("keyup", function (event) {
